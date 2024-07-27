@@ -1,0 +1,27 @@
+CREATE DATABASE LibraryManagement;
+
+USE LibraryManagement;
+
+CREATE TABLE Books (
+    Id INT PRIMARY KEY IDENTITY,
+    Title NVARCHAR(100) NOT NULL,
+    Author NVARCHAR(100) NOT NULL,
+    PublicationYear INT NOT NULL,
+    ISBN NVARCHAR(20) NOT NULL
+);
+
+CREATE TABLE Patrons (
+    Id INT PRIMARY KEY IDENTITY,
+    Name NVARCHAR(100) NOT NULL,
+    ContactInformation NVARCHAR(200) NOT NULL
+);
+
+CREATE TABLE BorrowingRecords (
+    Id INT PRIMARY KEY IDENTITY,
+    BookId INT NOT NULL,
+    PatronId INT NOT NULL,
+    BorrowDate DATETIME NOT NULL,
+    ReturnDate DATETIME NULL,
+    FOREIGN KEY (BookId) REFERENCES Books(Id),
+    FOREIGN KEY (PatronId) REFERENCES Patrons(Id)
+);
